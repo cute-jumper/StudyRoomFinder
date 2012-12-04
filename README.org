@@ -1,0 +1,28 @@
+* StudyRoomFinder
+** Overview
+   This is a piece of software helping students in Tsinghua University
+   to find out available study rooms.
+   - A backend parser and database manager: RoominfoParser.py
+   - A PyGTK user interface: querygtk.py
+   - A J2ME mobile client: *missing*
+
+** Get Started
+   Run in terminal:
+   : python RoominfoParser.py
+
+   It will result in two files: classroom.db and classroom. The former
+   can be used by the querygtk.py, and the latter can be used by the
+   mobile client by putting this file under my website's root
+   directory.
+
+   Run in terminal:
+   : python querygtk.py
+
+   You can get a graphical user interface. Stupid enough!
+
+** Things To Do
+   - I will try to find out the missing source file for mobile client.
+   - Refactoring, maybe. But I'm not very likely to do this without
+     outer motivation.
+
+
