@@ -26,7 +26,7 @@ class RoominfoParser(HTMLParser.HTMLParser):
             sqlstring += ', info'+str(i)
         sqlstring = '''create table if not exists classroom(
 building, name primary key'''+sqlstring + ');'
-        print sqlstring
+        # print sqlstring
         self.cursor.execute(sqlstring)
 
     def set_id(self, id_):
@@ -34,14 +34,14 @@ building, name primary key'''+sqlstring + ');'
     
     def handle_starttag(self, tag, attrs):
         if tag == 'td':
-            for i in attrs:
-                print i,
-            print
+            # for i in attrs:
+            #     print i,
+            # print
             self.intag = 1#表示进入了td环境
             if ('align', 'left') in attrs:
-                print self.name
+                # print self.name
                 if len(self.name) > 0:#加入上一行
-                    print 'self.info:', self.info
+                    # print 'self.info:', self.info
                     self.cursor.execute(self.insert, ((unicode(buildings[self.id-1], 'utf-8'), self.name)+tuple(self.info)))
                     self.conn.commit()
                 self.name = ''
@@ -56,7 +56,7 @@ building, name primary key'''+sqlstring + ');'
                 self.info.append(u'空')#没有课，且经过了div环境，将要离开
             self.intag = -1#表示离开td
         if tag == 'tr' and self.intag == -1:#加入最后一行
-            print self.name
+            # print self.name
             if len(self.name) > 0:
                 self.cursor.execute(self.insert, ((unicode(buildings[self.id-1], 'utf-8'), self.name)+tuple(self.info)))
                 self.conn.commit()
@@ -64,10 +64,10 @@ building, name primary key'''+sqlstring + ');'
 
     def handle_data(self, data):
         if self.intag == 2:
-            print 'info:', data
+            # print 'info:', data
             self.name += data.decode('gbk')
         elif self.intag == 3:
-            print 'info:', data.decode('gbk')
+            # print 'info:', data.decode('gbk')
             self.info.append(data.decode('gbk'))
             self.hasdata = 1
 
